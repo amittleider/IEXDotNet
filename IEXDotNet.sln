@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2047
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IEXDotNet", "IEXDotNet\IEXDotNet.csproj", "{AF3C04E1-EE4C-45F0-B8BC-5BAC6DCF69DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IEXDotNet.UnitTests", "IEXDotNet.UnitTests\IEXDotNet.UnitTests.csproj", "{9CE7C5F6-F5BA-4DC1-BB4F-F5F89635E227}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{AF3C04E1-EE4C-45F0-B8BC-5BAC6DCF69DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF3C04E1-EE4C-45F0-B8BC-5BAC6DCF69DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF3C04E1-EE4C-45F0-B8BC-5BAC6DCF69DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CE7C5F6-F5BA-4DC1-BB4F-F5F89635E227}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CE7C5F6-F5BA-4DC1-BB4F-F5F89635E227}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CE7C5F6-F5BA-4DC1-BB4F-F5F89635E227}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CE7C5F6-F5BA-4DC1-BB4F-F5F89635E227}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
