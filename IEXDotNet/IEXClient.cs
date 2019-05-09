@@ -71,5 +71,19 @@ namespace IEXDotNet
 
             return await stringTask;
         }
+
+        /// <summary>
+        /// GET /stock/{symbol}/upcoming-earnings
+        /// </summary>
+        /// <param name="symbol"></param>
+        /// <returns>The raw string result of th request.</returns>
+        public async Task<string> GetUpcomingEarnings(string symbol)
+        {
+            var routeUrl = $"stock/{symbol}/upcoming-earnings";
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+            var stringTask = client.GetStringAsync(requestUrl);
+
+            return await stringTask;
+        }
     }
 }

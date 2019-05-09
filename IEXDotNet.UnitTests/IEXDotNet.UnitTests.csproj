@@ -9,6 +9,9 @@
   <ItemGroup>
     <None Remove="AllIEXSymbols.txt" />
     <None Remove="appsettings.json" />
+    <None Remove="BalanceSheet.txt" />
+    <None Remove="CashFlowStatement.txt" />
+    <None Remove="IncomeStatement.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,6 +19,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BalanceSheet.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CashFlowStatement.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IncomeStatement.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

@@ -14,5 +14,12 @@ namespace IEXDotNet
 
             return symbolsList;
         }
+
+        public IEXBalanceSheetList FormatBalanceSheet(string balanceSheet)
+        {
+            IEXBalanceSheetList balanceSheetList = JsonConvert.DeserializeObject<IEXBalanceSheetList>(balanceSheet);
+
+            return balanceSheetList;
+        }
     }
 }
