@@ -24,7 +24,7 @@ namespace IEXDotNet
         /// GET /ref-data/iex/symbols
         /// </summary>
         /// <returns>The raw string result of the request.</returns>
-        public async Task<string> GetIEXSymbols()
+        public virtual async Task<string> GetIEXSymbols()
         {
             var routeUrl = $"ref-data/iex/symbols";
             var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
@@ -37,7 +37,7 @@ namespace IEXDotNet
         /// GET /stock/{symbol}/balance-sheet/{last}/{field}
         /// </summary>
         /// <returns>The raw string result of the request.</returns>
-        public async Task<string> GetBalanceSheet(string symbol, int last)
+        public virtual async Task<string> GetBalanceSheet(string symbol, int last)
         {
             var routeUrl = $"stock/{symbol}/balance-sheet/{last}";
             var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
@@ -50,7 +50,7 @@ namespace IEXDotNet
         /// GET /stock/{symbol}/income/{last}/{field}
         /// </summary>
         /// <returns>The raw string result of the request.</returns>
-        public async Task<string> GetIncomeStatement(string symbol, int last)
+        public virtual async Task<string> GetIncomeStatement(string symbol, int last)
         {
             var routeUrl = $"stock/{symbol}/income/{last}";
             var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
@@ -63,13 +63,42 @@ namespace IEXDotNet
         /// GET /stock/{symbol}/cash-flow/{last}/{field}
         /// </summary>
         /// <returns>The raw string result of the request.</returns>
-        public async Task<string> GetCashFlowStatement(string symbol, int last)
+        public virtual async Task<string> GetCashFlowStatement(string symbol, int last)
         {
             var routeUrl = $"stock/{symbol}/cash-flow/{last}";
             var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
             var stringTask = client.GetStringAsync(requestUrl);
 
             return await stringTask;
+        }
+
+        /// <summary>
+        /// GET /stock/{symbol}/upcoming-earnings
+        /// </summary>
+        /// <param name="symbol"></param>
+        /// <returns>The raw string result of the request.</returns>
+        public virtual async Task<string> GetUpcomingEarnings(string symbol)
+        {
+            var routeUrl = $"stock/{symbol}/upcoming-earnings";
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+            var stringTask = client.GetStringAsync(requestUrl);
+
+            return await stringTask;
+        }
+
+        /// <summary>
+        /// GET /stock/{symbol}/peers
+        /// This API is known to return weird results and there is an open bug here: https://github.com/iexg/IEX-API/issues/616
+        /// </summary>
+        /// <param name="symbol"></param>
+        /// <returns>The raw string result of the request.</returns>
+        public virtual async Task<string> GetPeers(string symbol)
+        {
+            var routeUrl = $"stock/{symbol}/peers";
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+            var responseString = await client.GetStringAsync(requestUrl);
+
+            return responseString;
         }
     }
 }

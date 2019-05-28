@@ -9,13 +9,29 @@
   <ItemGroup>
     <None Remove="AllIEXSymbols.txt" />
     <None Remove="appsettings.json" />
+    <None Remove="BalanceSheet.txt" />
+    <None Remove="CashFlowStatement.txt" />
+    <None Remove="IEXResponseText\PeersResponse.txt" />
+    <None Remove="IncomeStatement.txt" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="AllIEXSymbols.txt">
+    <EmbeddedResource Include="IEXResponseText\AllIEXSymbols.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IEXResponseText\BalanceSheet.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IEXResponseText\CashFlowStatement.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IEXResponseText\IncomeStatement.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IEXResponseText\PeersResponse.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
