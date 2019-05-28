@@ -13,7 +13,7 @@ namespace IEXDotNet.UnitTests
         [Fact]
         public void Should_Format_IEXSymbols()
         {
-            using (StreamReader reader = new StreamReader("AllIEXSymbols.txt"))
+            using (StreamReader reader = new StreamReader(Path.Combine("IEXResponseText", "AllIEXSymbols.txt")))
             {
                 string symbols = reader.ReadToEnd();
 
@@ -30,7 +30,7 @@ namespace IEXDotNet.UnitTests
         [Fact]
         public void Should_Format_BalanceSheet()
         {
-            using (StreamReader reader = new StreamReader("BalanceSheet.txt"))
+            using (StreamReader reader = new StreamReader(Path.Combine("IEXResponseText/BalanceSheet.txt")))
             {
                 string balanceSheetJson = reader.ReadToEnd();
 
@@ -42,6 +42,58 @@ namespace IEXDotNet.UnitTests
 
                 balanceSheetList.BalanceSheet[0].NetTangibleAssets.Should().Be(120177150156);
                 balanceSheetList.BalanceSheet[0].TreasuryStock.Should().BeNull();
+            }
+        }
+
+        [Fact]
+        public void Should_Format_IncomeStatement()
+        {
+            using (StreamReader reader = new StreamReader(Path.Combine("IEXResponseText/IncomeStatement.txt")))
+            {
+                string incomeStatementJson = reader.ReadToEnd();
+
+                IEXFormatter formatter = new IEXFormatter();
+                IEXIncomeStatementList incomeStatementList = formatter.FormatIncomeStatement(incomeStatementJson);
+
+                incomeStatementList.Symbol.Should().Be("AAPL");
+                incomeStatementList.Income.Count.Should().Be(4);
+
+                incomeStatementList.Income[0].TotalRevenue.Should().Be(87741596877);
+                incomeStatementList.Income[0].NetIncome.Should().Be(20683606036);
+            }
+        }
+
+        [Fact]
+        public void Should_Format_CashFlowStatement()
+        {
+            using (StreamReader reader = new StreamReader(Path.Combine("IEXResponseText/CashFlowStatement.txt")))
+            {
+                string cashFlowStatementJson = reader.ReadToEnd();
+
+                IEXFormatter formatter = new IEXFormatter();
+                IEXCashFlowStatementList incomeStatementList = formatter.FormatCashFlowStatement(cashFlowStatementJson);
+
+                incomeStatementList.Symbol.Should().Be("AAPL");
+                incomeStatementList.CashFlow.Count.Should().Be(4);
+
+                incomeStatementList.CashFlow[0].CashFlow.Should().Be(26779302494);
+                incomeStatementList.CashFlow[0].Depreciation.Should().Be(3514688687);
+            }
+        }
+
+        [Fact]
+        public void Should_Get_Peers()
+        {
+            using (StreamReader reader = new StreamReader(Path.Combine("IEXResponseText", "PeersResponse.txt")))
+            {
+                string peersJson = reader.ReadToEnd();
+
+                IEXFormatter formatter = new IEXFormatter();
+                List<string> peers = formatter.FormatPeers(peersJson);
+
+                peers.Count.Should().Be(7);
+                peers[0].Should().Be("MSFT");
+                peers[6].Should().Be("XLK");
             }
         }
     }

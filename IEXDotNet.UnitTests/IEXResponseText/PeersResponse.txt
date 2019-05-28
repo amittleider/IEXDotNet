@@ -1,0 +1,9 @@
+﻿[
+    "MSFT",
+    "NOK",
+    "IBM",
+    "BBRY",
+    "HPQ",
+    "GOOGL",
+    "XLK"
+]

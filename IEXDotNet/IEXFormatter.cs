@@ -21,5 +21,26 @@ namespace IEXDotNet
 
             return balanceSheetList;
         }
+
+        public IEXIncomeStatementList FormatIncomeStatement(string incomeStatementJson)
+        {
+            IEXIncomeStatementList incomeStatementList = JsonConvert.DeserializeObject<IEXIncomeStatementList>(incomeStatementJson);
+
+            return incomeStatementList;
+        }
+
+        public IEXCashFlowStatementList FormatCashFlowStatement(string cashFlowStatementJson)
+        {
+            IEXCashFlowStatementList cashFlowStatementList = JsonConvert.DeserializeObject<IEXCashFlowStatementList>(cashFlowStatementJson);
+
+            return cashFlowStatementList;
+        }
+
+        public List<string> FormatPeers(string peersJson)
+        {
+            List<string> cashFlowStatementList = JsonConvert.DeserializeObject<List<string>>(peersJson);
+
+            return cashFlowStatementList;
+        }
     }
 }
