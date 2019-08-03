@@ -37,10 +37,10 @@ namespace IEXDotNet
         /// GET /stock/{symbol}/balance-sheet/{last}/{field}
         /// </summary>
         /// <returns>The raw string result of the request.</returns>
-        public virtual async Task<string> GetBalanceSheet(string symbol, int last)
+        public virtual async Task<string> GetBalanceSheet(string symbol, int last, string frequency)
         {
             var routeUrl = $"stock/{symbol}/balance-sheet/{last}";
-            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}&period={frequency}");
             var stringTask = client.GetStringAsync(requestUrl);
 
             return await stringTask;
@@ -50,10 +50,10 @@ namespace IEXDotNet
         /// GET /stock/{symbol}/income/{last}/{field}
         /// </summary>
         /// <returns>The raw string result of the request.</returns>
-        public virtual async Task<string> GetIncomeStatement(string symbol, int last)
+        public virtual async Task<string> GetIncomeStatement(string symbol, int last, string frequency)
         {
             var routeUrl = $"stock/{symbol}/income/{last}";
-            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}&period={frequency}");
             var stringTask = client.GetStringAsync(requestUrl);
 
             return await stringTask;
@@ -63,10 +63,10 @@ namespace IEXDotNet
         /// GET /stock/{symbol}/cash-flow/{last}/{field}
         /// </summary>
         /// <returns>The raw string result of the request.</returns>
-        public virtual async Task<string> GetCashFlowStatement(string symbol, int last)
+        public virtual async Task<string> GetCashFlowStatement(string symbol, int last, string frequency)
         {
             var routeUrl = $"stock/{symbol}/cash-flow/{last}";
-            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}&period={frequency}");
             var stringTask = client.GetStringAsync(requestUrl);
 
             return await stringTask;
@@ -95,6 +95,40 @@ namespace IEXDotNet
         public virtual async Task<string> GetPeers(string symbol)
         {
             var routeUrl = $"stock/{symbol}/peers";
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+            var responseString = await client.GetStringAsync(requestUrl);
+
+            return responseString;
+        }
+
+        /// <summary>
+        /// GET /stock/{symbol}/short-interest
+        /// This API is still in Dev and can throw exceptions
+        /// </summary>
+        /// <param name="symbol"></param>
+        /// <returns></returns>
+        public virtual async Task<string> GetShortInterest(string symbol)
+        {
+            var routeUrl = $"stock/{symbol}/short-interest";
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+
+            string responseString = string.Empty;
+
+            responseString = await client.GetStringAsync(requestUrl);
+
+            return responseString;
+        }
+
+        /// <summary>
+        /// GET /stock/{symbol}/chart/{range}/{date}
+        /// https://iexcloud.io/docs/api/#historical-prices
+        /// </summary>
+        /// <param name="symbol"></param>
+        /// <param name="timeframe"></param>
+        /// <returns></returns>
+        public virtual async Task<string> GetHistoricalPrices(string symbol, string timeframe)
+        {
+            string routeUrl = $"stock/{symbol}/chart/{timeframe}";
             var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
             var responseString = await client.GetStringAsync(requestUrl);
 

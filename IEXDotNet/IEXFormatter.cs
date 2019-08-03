@@ -42,5 +42,11 @@ namespace IEXDotNet
 
             return cashFlowStatementList;
         }
+
+        public List<IEXHistoricalPrice> FormatHistoricalPrices(string historicalPricesJson)
+        {
+            List<IEXHistoricalPrice> historicalPrices = JsonConvert.DeserializeObject<List<IEXHistoricalPrice>>(historicalPricesJson);
+            return historicalPrices;
+        }
     }
 }

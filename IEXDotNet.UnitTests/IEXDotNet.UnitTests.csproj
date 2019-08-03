@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -11,6 +11,7 @@
     <None Remove="appsettings.json" />
     <None Remove="BalanceSheet.txt" />
     <None Remove="CashFlowStatement.txt" />
+    <None Remove="IEXResponseText\HistoricalPrices.txt" />
     <None Remove="IEXResponseText\PeersResponse.txt" />
     <None Remove="IncomeStatement.txt" />
   </ItemGroup>
@@ -26,6 +27,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="IEXResponseText\CashFlowStatement.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IEXResponseText\HistoricalPrices.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="IEXResponseText\IncomeStatement.txt">

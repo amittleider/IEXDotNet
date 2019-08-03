@@ -96,5 +96,20 @@ namespace IEXDotNet.UnitTests
                 peers[6].Should().Be("XLK");
             }
         }
+
+        [Fact]
+        public void Should_Format_HistoricalPrices()
+        {
+            using (StreamReader reader = new StreamReader(Path.Combine("IEXResponseText", "HistoricalPrices.txt")))
+            {
+                string historicalPricesJson = reader.ReadToEnd();
+
+                IEXFormatter formatter = new IEXFormatter();
+                List<IEXHistoricalPrice> historicalPrices = formatter.FormatHistoricalPrices(historicalPricesJson);
+
+                historicalPrices.Count.Should().Be(64);
+                historicalPrices[0].open.Should().Be(133.7m);
+            }
+        }
     }
 }

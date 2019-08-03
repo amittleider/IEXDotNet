@@ -28,7 +28,10 @@ namespace IEXDotNet.UnitTests
                        .Build();
             string token = config["TOKEN"];
             IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
-            string result = await client.GetBalanceSheet("AAPL", 4);
+            string result = await client.GetBalanceSheet("AAPL", 4, "quarter");
+            result.Should().NotBeNullOrEmpty();
+
+            result = await client.GetBalanceSheet("AAPL", 4, "annual");
             result.Should().NotBeNullOrEmpty();
         }
 
@@ -40,7 +43,10 @@ namespace IEXDotNet.UnitTests
                        .Build();
             string token = config["TOKEN"];
             IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
-            string result = await client.GetIncomeStatement("AAPL", 4);
+            string result = await client.GetIncomeStatement("AAPL", 4, "quarter");
+            result.Should().NotBeNullOrEmpty();
+
+            result = await client.GetIncomeStatement("AAPL", 4, "annual");
             result.Should().NotBeNullOrEmpty();
         }
 
@@ -52,7 +58,10 @@ namespace IEXDotNet.UnitTests
                        .Build();
             string token = config["TOKEN"];
             IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
-            string result = await client.GetCashFlowStatement("AAPL", 4);
+            string result = await client.GetCashFlowStatement("AAPL", 4, "quarter");
+            result.Should().NotBeNullOrEmpty();
+
+            result = await client.GetCashFlowStatement("AAPL", 4, "annual");
             result.Should().NotBeNullOrEmpty();
         }
 
@@ -77,6 +86,30 @@ namespace IEXDotNet.UnitTests
             string token = config["TOKEN"];
             IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
             string result = await client.GetUpcomingEarnings("AAPL");
+            result.Should().NotBeNullOrEmpty();
+        }
+
+        [Fact(Skip = "Still in dev, can throw exceptions")]
+        public async Task GetShortInterest_Should_FetchResults()
+        {
+            var config = new ConfigurationBuilder()
+                       .AddJsonFile("appsettings.json")
+                       .Build();
+            string token = config["TOKEN"];
+            IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
+            string result = await client.GetShortInterest("msft");
+            result.Should().NotBeNullOrEmpty();
+        }
+
+        [Fact]
+        public async Task GetHistoricalPrices_Should_FetchResults()
+        {
+            var config = new ConfigurationBuilder()
+                       .AddJsonFile("appsettings.json")
+                       .Build();
+            string token = config["TOKEN"];
+            IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
+            string result = await client.GetHistoricalPrices("msft", "3m");
             result.Should().NotBeNullOrEmpty();
         }
     }
