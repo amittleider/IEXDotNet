@@ -134,5 +134,19 @@ namespace IEXDotNet
 
             return responseString;
         }
+
+        /// <summary>
+        /// GET /account/usage/{type}
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public virtual async Task<string> GetAccountUsage()
+        {
+            string routeUrl = $"account/usage";
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+            var responseString = await client.GetStringAsync(requestUrl);
+
+            return responseString;
+        }
     }
 }
