@@ -77,7 +77,7 @@ namespace IEXDotNet.UnitTests
             result.Should().NotBeNullOrEmpty();
         }
 
-        [Fact(Skip = "Must have at least 'Grow' access for Upcoming Earnings calls. The CI does not.")]
+        [Fact]
         public async Task GetUpcomingEarnings_Should_FetchResults()
         {
             var config = new ConfigurationBuilder()
@@ -109,7 +109,19 @@ namespace IEXDotNet.UnitTests
                        .Build();
             string token = config["TOKEN"];
             IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
-            string result = await client.GetHistoricalPrices("msft", "3m");
+            string result = await client.GetHistoricalPrices("msft", "5d");
+            result.Should().NotBeNullOrEmpty();
+        }
+
+        [Fact]
+        public async Task GetAccountUsage_Should_FetchResults()
+        {
+            var config = new ConfigurationBuilder()
+                       .AddJsonFile("appsettings.json")
+                       .Build();
+            string token = config["TOKEN"];
+            IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
+            string result = await client.GetAccountUsage();
             result.Should().NotBeNullOrEmpty();
         }
     }

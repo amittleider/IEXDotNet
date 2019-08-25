@@ -48,5 +48,11 @@ namespace IEXDotNet
             List<IEXHistoricalPrice> historicalPrices = JsonConvert.DeserializeObject<List<IEXHistoricalPrice>>(historicalPricesJson);
             return historicalPrices;
         }
+
+        public IEXAccountUsage FormatAccountUsage(string accountUsageJson)
+        {
+            IEXAccountUsage accountUsage = JsonConvert.DeserializeObject<IEXAccountUsage>(accountUsageJson);
+            return accountUsage;
+        }
     }
 }

@@ -111,5 +111,19 @@ namespace IEXDotNet.UnitTests
                 historicalPrices[0].open.Should().Be(133.7m);
             }
         }
+
+        [Fact]
+        public void Should_Format_AccountUsage()
+        {
+            using (StreamReader reader = new StreamReader(Path.Combine("IEXResponseText", "AccountUsage.json")))
+            {
+                string accountUsageJson = reader.ReadToEnd();
+
+                IEXFormatter formatter = new IEXFormatter();
+                IEXAccountUsage accountUsage = formatter.FormatAccountUsage(accountUsageJson);
+
+                accountUsage.Messages.MonthlyUsage.Should().Be(128054);
+            }
+        }
     }
 }
