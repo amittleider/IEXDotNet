@@ -54,5 +54,11 @@ namespace IEXDotNet
             IEXAccountUsage accountUsage = JsonConvert.DeserializeObject<IEXAccountUsage>(accountUsageJson);
             return accountUsage;
         }
+
+        public List<IexDividend> FormatDividends(string dividendJson)
+        {
+            List<IexDividend> dividend = JsonConvert.DeserializeObject<List<IexDividend>>(dividendJson);
+            return dividend;
+        }
     }
 }
