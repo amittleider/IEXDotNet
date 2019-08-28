@@ -148,5 +148,19 @@ namespace IEXDotNet
 
             return responseString;
         }
+
+        /// <summary>
+        /// GET /stock/{symbol}/dividends/{range}
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public virtual async Task<string> GetDividends(string symbol, string range)
+        {
+            string routeUrl = $"stock/{symbol}/dividends/{range}";
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+            var responseString = await client.GetStringAsync(requestUrl);
+
+            return responseString;
+        }
     }
 }

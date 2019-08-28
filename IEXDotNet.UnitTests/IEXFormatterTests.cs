@@ -125,5 +125,28 @@ namespace IEXDotNet.UnitTests
                 accountUsage.Messages.MonthlyUsage.Should().Be(128054);
             }
         }
+
+        [Fact]
+        public void Should_Format_Dividend()
+        {
+            using (StreamReader reader = new StreamReader(Path.Combine("IEXResponseText", "Dividend.json")))
+            {
+                string dividend = reader.ReadToEnd();
+
+                IEXFormatter formatter = new IEXFormatter();
+                List<IexDividend> iexDividend = formatter.FormatDividends(dividend);
+
+                iexDividend.Count.Should().Be(4);
+                iexDividend[0].amount.Should().Be(0.47m);
+                iexDividend[1].amount.Should().Be(0.48m);
+                iexDividend[2].amount.Should().Be(0.47m);
+                iexDividend[3].amount.Should().Be(0.48m);
+
+                iexDividend[0].exDate.Should().Be("2019-08-21");
+                iexDividend[1].exDate.Should().Be("2019-05-24");
+                iexDividend[2].exDate.Should().Be("2019-02-21");
+                iexDividend[3].exDate.Should().Be("2018-11-24");
+            }
+        }
     }
 }

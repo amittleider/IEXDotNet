@@ -124,5 +124,17 @@ namespace IEXDotNet.UnitTests
             string result = await client.GetAccountUsage();
             result.Should().NotBeNullOrEmpty();
         }
+
+        [Fact]
+        public async Task GetDividends_Should_FetchResults()
+        {
+            var config = new ConfigurationBuilder()
+                       .AddJsonFile("appsettings.json")
+                       .Build();
+            string token = config["TOKEN"];
+            IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
+            string result = await client.GetDividends("MSFT", "1y");
+            result.Should().NotBeNullOrEmpty();
+        }
     }
 }
