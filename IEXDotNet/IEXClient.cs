@@ -162,5 +162,28 @@ namespace IEXDotNet
 
             return responseString;
         }
+
+        /// <summary>
+        /// To find out the most recent available 10-K/10-Qs
+        /// GET /data-points/{symbol}
+        /// </summary>
+        public virtual async Task<string> GetDataPoints(string symbol)
+        {
+            string routeUrl = $"data-points/{symbol}";
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+            var responseString = await client.GetStringAsync(requestUrl);
+
+            return responseString;
+        }
+
+
+        public virtual async Task<string> GetTimeSeries(string key, string symbol)
+        {
+            string routeUrl = $"time-series/{key}/{symbol}";
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+            var responseString = await client.GetStringAsync(requestUrl);
+
+            return responseString;
+        }
     }
 }

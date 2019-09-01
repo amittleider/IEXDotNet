@@ -136,5 +136,29 @@ namespace IEXDotNet.UnitTests
             string result = await client.GetDividends("MSFT", "1y");
             result.Should().NotBeNullOrEmpty();
         }
+
+        [Fact]
+        public async Task GetDataPoints_Should_FetchResults()
+        {
+            var config = new ConfigurationBuilder()
+                       .AddJsonFile("appsettings.json")
+                       .Build();
+            string token = config["TOKEN"];
+            IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
+            string result = await client.GetDataPoints("MSFT");
+            result.Should().NotBeNullOrEmpty();
+        }
+
+        [Fact]
+        public async Task GetTimeSeries_Should_FetchResults()
+        {
+            var config = new ConfigurationBuilder()
+                       .AddJsonFile("appsettings.json")
+                       .Build();
+            string token = config["TOKEN"];
+            IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
+            string result = await client.GetTimeSeries("REPORTED_FINANCIALS", "MSFT");
+            result.Should().NotBeNullOrEmpty();
+        }
     }
 }

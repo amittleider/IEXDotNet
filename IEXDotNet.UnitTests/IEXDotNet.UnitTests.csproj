@@ -12,9 +12,11 @@
     <None Remove="BalanceSheet.txt" />
     <None Remove="CashFlowStatement.txt" />
     <None Remove="IEXResponseText\AccountUsage.json" />
+    <None Remove="IEXResponseText\DataPoints.json" />
     <None Remove="IEXResponseText\Dividend.json" />
     <None Remove="IEXResponseText\HistoricalPrices.txt" />
     <None Remove="IEXResponseText\PeersResponse.txt" />
+    <None Remove="IEXResponseText\TimeSeries.json" />
     <None Remove="IncomeStatement.txt" />
   </ItemGroup>
 
@@ -34,6 +36,9 @@
     <EmbeddedResource Include="IEXResponseText\CashFlowStatement.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="IEXResponseText\DataPoints.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="IEXResponseText\Dividend.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -44,6 +49,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="IEXResponseText\PeersResponse.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IEXResponseText\TimeSeries.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
