@@ -1,4 +1,5 @@
 ﻿using IEXDotNet.IEXDataStructures;
+using IEXDotNet.IEXDataStructures.Converters;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -62,7 +63,7 @@ namespace IEXDotNet
 
         public List<IexDataPoint> FormatDataPoints(string dataPointsJson)
         {
-            List<IexDataPoint> dataPoints = JsonConvert.DeserializeObject<List<IexDataPoint>>(dataPointsJson);
+            List<IexDataPoint> dataPoints = JsonConvert.DeserializeObject<List<IexDataPoint>>(dataPointsJson, new MinDateTimeConverter());
             return dataPoints;
         }
 

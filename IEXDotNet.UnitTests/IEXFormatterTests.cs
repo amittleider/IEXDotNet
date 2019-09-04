@@ -172,6 +172,18 @@ namespace IEXDotNet.UnitTests
             }
         }
 
+        [Fact]
+        public void Should_Format_DataPoints_WithNullDateTimes()
+        {
+            using (StreamReader reader = new StreamReader(Path.Combine("IEXResponseText", "DataPointsWithNullDateTimes.json")))
+            {
+                string dataPointsJson = reader.ReadToEnd();
+
+                IEXFormatter formatter = new IEXFormatter();
+                List<IexDataPoint> iexDataPoints = formatter.FormatDataPoints(dataPointsJson);
+            }
+        }
+
         [Fact(Skip = "Time series is not implemented")]
         public void Should_Format_TimeSeries()
         {

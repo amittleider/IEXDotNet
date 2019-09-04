@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IEXDotNet.IEXDataStructures.Converters;
+using Newtonsoft.Json;
+using System;
 
 namespace IEXDotNet.IEXDataStructures
 {
@@ -23,6 +25,7 @@ namespace IEXDotNet.IEXDataStructures
             set;
         }
 
+        [JsonConverter(typeof(MinDateTimeConverter))]
         public DateTime LastUpdated
         {
             get;

@@ -4,9 +4,6 @@ using System.Threading.Tasks;
 
 namespace IEXDotNet
 {
-    /// <summary>
-    /// pip install git+https://github.com/QuantConnect/pythonnet.git
-    /// </summary>
     public class IEXClient
     {
         private readonly string baseUrl;
