@@ -1,8 +1,8 @@
 ﻿using IEXDotNet.IEXDataStructures;
+using IEXDotNet.IEXDataStructures.Converters;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace IEXDotNet
 {
@@ -59,6 +59,17 @@ namespace IEXDotNet
         {
             List<IexDividend> dividend = JsonConvert.DeserializeObject<List<IexDividend>>(dividendJson);
             return dividend;
+        }
+
+        public List<IexDataPoint> FormatDataPoints(string dataPointsJson)
+        {
+            List<IexDataPoint> dataPoints = JsonConvert.DeserializeObject<List<IexDataPoint>>(dataPointsJson, new MinDateTimeConverter());
+            return dataPoints;
+        }
+
+        public List<IexTimeSeries> FormatTimeSeries(string timeSeriesJson)
+        {
+            throw new NotImplementedException();
         }
     }
 }

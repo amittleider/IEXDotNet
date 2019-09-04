@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Xunit;
 
 namespace IEXDotNet.UnitTests
@@ -146,6 +147,52 @@ namespace IEXDotNet.UnitTests
                 iexDividend[1].exDate.Should().Be("2019-05-24");
                 iexDividend[2].exDate.Should().Be("2019-02-21");
                 iexDividend[3].exDate.Should().Be("2018-11-24");
+            }
+        }
+
+        [Fact]
+        public void Should_Format_DataPoints()
+        {
+            using (StreamReader reader = new StreamReader(Path.Combine("IEXResponseText", "DataPoints.json")))
+            {
+                string dataPointsJson = reader.ReadToEnd();
+
+                IEXFormatter formatter = new IEXFormatter();
+                List<IexDataPoint> iexDataPoints = formatter.FormatDataPoints(dataPointsJson);
+
+                iexDataPoints.Count.Should().Be(126);
+                IexDataPoint latest10k = iexDataPoints.Where(dp => dp.Key == "LATEST-FINANCIAL-ANNUAL-REPORT-DATE").FirstOrDefault();
+                IexDataPoint latest10q = iexDataPoints.Where(dp => dp.Key == "LATEST-FINANCIAL-QUARTERLY-REPORT-DATE").FirstOrDefault();
+
+                latest10k.LastUpdated.Should().Be(new DateTime(2019, 8, 31, 10, 5, 34));
+                latest10k.Weight.Should().Be(0);
+
+                latest10q.LastUpdated.Should().Be(new DateTime(2019, 8, 31, 10, 13, 25));
+                latest10q.Weight.Should().Be(0);
+            }
+        }
+
+        [Fact]
+        public void Should_Format_DataPoints_WithNullDateTimes()
+        {
+            using (StreamReader reader = new StreamReader(Path.Combine("IEXResponseText", "DataPointsWithNullDateTimes.json")))
+            {
+                string dataPointsJson = reader.ReadToEnd();
+
+                IEXFormatter formatter = new IEXFormatter();
+                List<IexDataPoint> iexDataPoints = formatter.FormatDataPoints(dataPointsJson);
+            }
+        }
+
+        [Fact(Skip = "Time series is not implemented")]
+        public void Should_Format_TimeSeries()
+        {
+            using (StreamReader reader = new StreamReader(Path.Combine("IEXResponseText", "TimeSeries.json")))
+            {
+                string timeSeriesJson = reader.ReadToEnd();
+
+                IEXFormatter formatter = new IEXFormatter();
+                List<IexTimeSeries> iexTimeSeries = formatter.FormatTimeSeries(timeSeriesJson);
             }
         }
     }
