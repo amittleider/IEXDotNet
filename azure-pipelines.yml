@@ -18,12 +18,21 @@ steps:
 - script: |
     dotnet restore
     dotnet build --output $(Build.ArtifactStagingDirectory)
+    dotnet test
     dotnet pack --output $(Build.ArtifactStagingDirectory) -c Release /p:Version=1.0.$(Build.BuildId)
 - task: PublishBuildArtifacts@1
   displayName: publish artifacts
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+
+- task: VSTest@2
+  inputs:
+    testSelector: 'testAssemblies' # Options: testAssemblies, testPlan, testRun
+    testAssemblyVer2: | # Required when testSelector == TestAssemblies
+     **\*Test*.dll
+     !**\*TestAdapter.dll
+     !**\obj\** 
     
 - task: DotNetCoreCLI@2
   displayName: dotnet nuget push
