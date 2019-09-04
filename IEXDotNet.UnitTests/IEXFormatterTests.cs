@@ -164,11 +164,29 @@ namespace IEXDotNet.UnitTests
                 IexDataPoint latest10k = iexDataPoints.Where(dp => dp.Key == "LATEST-FINANCIAL-ANNUAL-REPORT-DATE").FirstOrDefault();
                 IexDataPoint latest10q = iexDataPoints.Where(dp => dp.Key == "LATEST-FINANCIAL-QUARTERLY-REPORT-DATE").FirstOrDefault();
 
-                latest10k.LastUpdated.Should().Be(new DateTime(2019, 8, 31, 10, 5, 34));
+                latest10k.LastUpdated.Should().Be(new DateTime(2019, 8, 31, 8, 5, 34));
                 latest10k.Weight.Should().Be(0);
 
-                latest10q.LastUpdated.Should().Be(new DateTime(2019, 8, 31, 10, 13, 25));
+                latest10q.LastUpdated.Should().Be(new DateTime(2019, 8, 31, 8, 13, 25));
                 latest10q.Weight.Should().Be(0);
+            }
+        }
+
+        [Fact]
+        public void Should_Format_DataPoints2()
+        {
+            using (StreamReader reader = new StreamReader(Path.Combine("IEXResponseText", "DataPoints2.json")))
+            {
+                string dataPointsJson = reader.ReadToEnd();
+
+                IEXFormatter formatter = new IEXFormatter();
+                List<IexDataPoint> iexDataPoints = formatter.FormatDataPoints(dataPointsJson);
+
+                iexDataPoints.Count.Should().Be(1);
+                IexDataPoint latest10k = iexDataPoints.Where(dp => dp.Key == "LATEST-FINANCIAL-ANNUAL-REPORT-DATE").FirstOrDefault();
+
+                latest10k.LastUpdated.Should().Be(new DateTime(2019, 8, 31, 8, 5, 34));
+                latest10k.Weight.Should().Be(0);
             }
         }
 
