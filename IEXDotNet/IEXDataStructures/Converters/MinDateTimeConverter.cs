@@ -18,7 +18,7 @@ namespace IEXDotNet.IEXDataStructures.Converters
                 return DateTime.MinValue;
             }
 
-            return (DateTime)reader.Value;
+            return ((DateTime)reader.Value).ToUniversalTime();
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

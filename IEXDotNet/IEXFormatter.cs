@@ -1,8 +1,10 @@
 ﻿using IEXDotNet.IEXDataStructures;
 using IEXDotNet.IEXDataStructures.Converters;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace IEXDotNet
 {
@@ -63,7 +65,12 @@ namespace IEXDotNet
 
         public List<IexDataPoint> FormatDataPoints(string dataPointsJson)
         {
-            List<IexDataPoint> dataPoints = JsonConvert.DeserializeObject<List<IexDataPoint>>(dataPointsJson, new MinDateTimeConverter());
+            var utcSettings = new JsonSerializerSettings
+            {
+                DateTimeZoneHandling = DateTimeZoneHandling.Utc
+            };
+
+            List<IexDataPoint> dataPoints = JsonConvert.DeserializeObject<List<IexDataPoint>>(dataPointsJson, utcSettings); // "2019-08-31T08:05:34+00:00"
             return dataPoints;
         }
 

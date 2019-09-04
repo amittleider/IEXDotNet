@@ -13,6 +13,7 @@
     <None Remove="CashFlowStatement.txt" />
     <None Remove="IEXResponseText\AccountUsage.json" />
     <None Remove="IEXResponseText\DataPoints.json" />
+    <None Remove="IEXResponseText\DataPoints2.json" />
     <None Remove="IEXResponseText\DataPointsWithNullDateTimes.json" />
     <None Remove="IEXResponseText\Dividend.json" />
     <None Remove="IEXResponseText\HistoricalPrices.txt" />
@@ -22,6 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="IEXResponseText\DataPoints2.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="IEXResponseText\DataPointsWithNullDateTimes.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
