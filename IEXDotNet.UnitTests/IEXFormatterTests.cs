@@ -83,7 +83,7 @@ namespace IEXDotNet.UnitTests
         }
 
         [Fact]
-        public void Should_Get_Peers()
+        public void Should_Format_GetPeers()
         {
             using (StreamReader reader = new StreamReader(Path.Combine("IEXResponseText", "PeersResponse.txt")))
             {
@@ -211,6 +211,21 @@ namespace IEXDotNet.UnitTests
 
                 IEXFormatter formatter = new IEXFormatter();
                 List<IexTimeSeries> iexTimeSeries = formatter.FormatTimeSeries(timeSeriesJson);
+            }
+        }
+
+        [Fact]
+        public void Should_Format_UpcomingEarnings()
+        {
+            using (StreamReader reader = new StreamReader(Path.Combine("IEXResponseText", "UpcomingEarnings.json")))
+            {
+                string upcomingEarningsJson = reader.ReadToEnd();
+
+                IEXFormatter formatter = new IEXFormatter();
+                List<IexUpcomingEarnings> iexUpcomingEarnings = formatter.FormatUpcomingEarnings(upcomingEarningsJson);
+                iexUpcomingEarnings.Count.Should().Be(1);
+                iexUpcomingEarnings[0].Symbol.Should().Be("AAPL");
+                iexUpcomingEarnings[0].ReportDate.Should().Be(new DateTime(2019, 11, 09));
             }
         }
     }

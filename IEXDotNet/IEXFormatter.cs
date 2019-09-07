@@ -78,5 +78,11 @@ namespace IEXDotNet
         {
             throw new NotImplementedException();
         }
+
+        public List<IexUpcomingEarnings> FormatUpcomingEarnings(string upcomingEarningsJson)
+        {
+            List<IexUpcomingEarnings> earnings = JsonConvert.DeserializeObject<List<IexUpcomingEarnings>>(upcomingEarningsJson);
+            return earnings;
+        }
     }
 }
