@@ -17,6 +17,7 @@
     <None Remove="IEXResponseText\DataPointsWithNullDateTimes.json" />
     <None Remove="IEXResponseText\Dividend.json" />
     <None Remove="IEXResponseText\HistoricalPrices.txt" />
+    <None Remove="IEXResponseText\KeyStats.json" />
     <None Remove="IEXResponseText\PeersResponse.txt" />
     <None Remove="IEXResponseText\TimeSeries.json" />
     <None Remove="IEXResponseText\UpcomingEarnings.json" />
@@ -58,6 +59,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="IEXResponseText\IncomeStatement.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IEXResponseText\KeyStats.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="IEXResponseText\PeersResponse.txt">

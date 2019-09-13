@@ -182,5 +182,14 @@ namespace IEXDotNet
 
             return responseString;
         }
+
+        public virtual async Task<string> GetKeyStats(string symbol)
+        {
+            string routeUrl = $"stock/{symbol}/stats";
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+            var responseString = await client.GetStringAsync(requestUrl);
+
+            return responseString;
+        }
     }
 }

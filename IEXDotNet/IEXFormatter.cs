@@ -84,5 +84,11 @@ namespace IEXDotNet
             List<IexUpcomingEarnings> earnings = JsonConvert.DeserializeObject<List<IexUpcomingEarnings>>(upcomingEarningsJson);
             return earnings;
         }
+
+        public IexKeyStats FormatKeyStats(string keyStatsJson)
+        {
+            IexKeyStats keyStats = JsonConvert.DeserializeObject<IexKeyStats>(keyStatsJson);
+            return keyStats;
+        }
     }
 }
