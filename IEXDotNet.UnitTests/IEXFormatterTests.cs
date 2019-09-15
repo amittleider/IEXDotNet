@@ -228,5 +228,21 @@ namespace IEXDotNet.UnitTests
                 iexUpcomingEarnings[0].ReportDate.Should().Be(new DateTime(2019, 11, 09));
             }
         }
+
+        [Fact]
+        public void Should_Format_KeyStats()
+        {
+            using (StreamReader reader = new StreamReader(Path.Combine("IEXResponseText", "KeyStats.json")))
+            {
+                string keyStatsJson = reader.ReadToEnd();
+
+                IEXFormatter formatter = new IEXFormatter();
+                IexKeyStats keyStats = formatter.FormatKeyStats(keyStatsJson);
+
+                keyStats.CompanyName.Should().Be("Apple Inc.");
+                keyStats.SharesOutstanding.Should().Be(5213840000);
+                keyStats.Float.Should().Be(5203997571);
+    }
+        }
     }
 }

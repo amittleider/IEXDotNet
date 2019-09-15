@@ -160,5 +160,17 @@ namespace IEXDotNet.UnitTests
             string result = await client.GetTimeSeries("REPORTED_FINANCIALS", "MSFT");
             result.Should().NotBeNullOrEmpty();
         }
+
+        [Fact]
+        public async Task GetKeyStats_Should_FetchResults()
+        {
+            var config = new ConfigurationBuilder()
+                       .AddJsonFile("appsettings.json")
+                       .Build();
+            string token = config["TOKEN"];
+            IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
+            string result = await client.GetKeyStats("MSFT");
+            result.Should().NotBeNullOrEmpty();
+        }
     }
 }
