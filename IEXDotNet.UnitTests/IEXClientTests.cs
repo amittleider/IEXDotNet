@@ -172,5 +172,17 @@ namespace IEXDotNet.UnitTests
             string result = await client.GetKeyStats("MSFT");
             result.Should().NotBeNullOrEmpty();
         }
+
+        [Fact]
+        public async Task GetCompany_Should_FetchResults()
+        {
+            var config = new ConfigurationBuilder()
+                       .AddJsonFile("appsettings.json")
+                       .Build();
+            string token = config["TOKEN"];
+            IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
+            string result = await client.GetCompany("MSFT");
+            result.Should().NotBeNullOrEmpty();
+        }
     }
 }

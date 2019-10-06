@@ -242,7 +242,26 @@ namespace IEXDotNet.UnitTests
                 keyStats.CompanyName.Should().Be("Apple Inc.");
                 keyStats.SharesOutstanding.Should().Be(5213840000);
                 keyStats.Float.Should().Be(5203997571);
-    }
+            }
+        }
+
+        [Fact]
+        public void Should_Format_Company()
+        {
+            using (StreamReader reader = new StreamReader(Path.Combine("IEXResponseText", "Company.json")))
+            {
+                string companyJson = reader.ReadToEnd();
+
+                IEXFormatter formatter = new IEXFormatter();
+                IexCompany company = formatter.FormatCompany(companyJson);
+
+                company.Ceo.Should().Be("Timothy Donald Cook");
+                company.Tags.Length.Should().Be(2);
+                company.Tags[0].Should().Be("Electronic Technology");
+                company.Tags[1].Should().Be("Telecommunications Equipment");
+                company.Symbol.Should().Be("AAPL");
+                company.Employees.Should().Be(132000);
+            }
         }
     }
 }

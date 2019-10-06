@@ -90,5 +90,11 @@ namespace IEXDotNet
             IexKeyStats keyStats = JsonConvert.DeserializeObject<IexKeyStats>(keyStatsJson);
             return keyStats;
         }
+
+        public IexCompany FormatCompany(string companyJson)
+        {
+            IexCompany company = JsonConvert.DeserializeObject<IexCompany>(companyJson);
+            return company;
+        }
     }
 }

@@ -191,5 +191,19 @@ namespace IEXDotNet
 
             return responseString;
         }
+
+        /// <summary>
+        /// // GET /stock/{symbol}/company
+        /// </summary>
+        /// <param name="symbol"></param>
+        /// <returns></returns>
+        public virtual async Task<string> GetCompany(string symbol)
+        {
+            string routeUrl = $"stock/{symbol}/company";
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+            var responseString = await client.GetStringAsync(requestUrl);
+
+            return responseString;
+        }
     }
 }
