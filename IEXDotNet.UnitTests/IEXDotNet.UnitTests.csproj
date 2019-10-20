@@ -13,16 +13,31 @@
     <None Remove="CashFlowStatement.txt" />
     <None Remove="IEXResponseText\AccountUsage.json" />
     <None Remove="IEXResponseText\Company.json" />
+    <None Remove="IEXResponseText\Company2.json" />
     <None Remove="IEXResponseText\DataPoints.json" />
     <None Remove="IEXResponseText\DataPoints2.json" />
     <None Remove="IEXResponseText\DataPointsWithNullDateTimes.json" />
     <None Remove="IEXResponseText\Dividend.json" />
     <None Remove="IEXResponseText\HistoricalPrices.txt" />
     <None Remove="IEXResponseText\KeyStats.json" />
+    <None Remove="IEXResponseText\KeyStats2.json" />
     <None Remove="IEXResponseText\PeersResponse.txt" />
+    <None Remove="IEXResponseText\Symbols.json" />
     <None Remove="IEXResponseText\TimeSeries.json" />
     <None Remove="IEXResponseText\UpcomingEarnings.json" />
     <None Remove="IncomeStatement.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="IEXResponseText\Company2.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IEXResponseText\KeyStats2.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IEXResponseText\Symbols.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

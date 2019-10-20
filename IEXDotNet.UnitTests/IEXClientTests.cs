@@ -21,6 +21,18 @@ namespace IEXDotNet.UnitTests
         }
 
         [Fact]
+        public async Task GetSymbols_Should_FetchResults()
+        {
+            var config = new ConfigurationBuilder()
+                       .AddJsonFile("appsettings.json")
+                       .Build();
+            string token = config["TOKEN"];
+            IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
+            string result = await client.GetSymbols();
+            result.Should().NotBeNullOrEmpty();
+        }
+
+        [Fact]
         public async Task GetBalanceSheet_Should_FetchResults()
         {
             var config = new ConfigurationBuilder()
