@@ -1,18 +1,16 @@
 ﻿using IEXDotNet.IEXDataStructures;
 using IEXDotNet.IEXDataStructures.Converters;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 
 namespace IEXDotNet
 {
     public class IEXFormatter
     {
-        public List<IEXSymbol> FormatIEXSymbols(string iexSymbols)
+        public List<IexIexSymbol> FormatIexIexSymbols(string iexIexSymbols)
         {
-            List<IEXSymbol> symbolsList = JsonConvert.DeserializeObject<List<IEXSymbol>>(iexSymbols);
+            List<IexIexSymbol> symbolsList = JsonConvert.DeserializeObject<List<IexIexSymbol>>(iexIexSymbols);
 
             return symbolsList;
         }
@@ -22,6 +20,13 @@ namespace IEXDotNet
             IEXBalanceSheetList balanceSheetList = JsonConvert.DeserializeObject<IEXBalanceSheetList>(balanceSheet);
 
             return balanceSheetList;
+        }
+
+        public List<IexSymbol> FormatSymbols(string symbols)
+        {
+            List<IexSymbol> iexSymbols = JsonConvert.DeserializeObject<List<IexSymbol>>(symbols);
+
+            return iexSymbols;
         }
 
         public IEXIncomeStatementList FormatIncomeStatement(string incomeStatementJson)

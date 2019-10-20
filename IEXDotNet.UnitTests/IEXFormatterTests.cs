@@ -12,6 +12,23 @@ namespace IEXDotNet.UnitTests
     public class IEXFormatterTests
     {
         [Fact]
+        public void Should_Format_Symbols()
+        {
+            using (StreamReader reader = new StreamReader(Path.Combine("IEXResponseText", "Symbols.json")))
+            {
+                string symbols = reader.ReadToEnd();
+
+                IEXFormatter formatter = new IEXFormatter();
+                List<IexSymbol> symbolsList = formatter.FormatSymbols(symbols);
+
+                symbolsList[0].Symbol.Should().Be("A");
+                symbolsList[0].Date.Should().Be(new DateTime(2019, 10, 16));
+                symbolsList[0].IsEnabled.Should().Be(true);
+                symbolsList.Count.Should().Be(8840);
+            }
+        }
+
+        [Fact]
         public void Should_Format_IEXSymbols()
         {
             using (StreamReader reader = new StreamReader(Path.Combine("IEXResponseText", "AllIEXSymbols.txt")))
@@ -19,7 +36,7 @@ namespace IEXDotNet.UnitTests
                 string symbols = reader.ReadToEnd();
 
                 IEXFormatter formatter = new IEXFormatter();
-                List<IEXSymbol> symbolsList = formatter.FormatIEXSymbols(symbols);
+                List<IexIexSymbol> symbolsList = formatter.FormatIexIexSymbols(symbols);
 
                 symbolsList[0].Symbol.Should().Be("A");
                 symbolsList[0].Date.Should().Be(new DateTime(2019, 4, 5));
@@ -245,6 +262,24 @@ namespace IEXDotNet.UnitTests
             }
         }
 
+        [Fact(Skip = "Employees and datetimes need to be parsed correctly. Skipping this for now.")]
+        public void Should_Format_KeyStats2()
+        {
+            using (StreamReader reader = new StreamReader(Path.Combine("IEXResponseText", "KeyStats2.json")))
+            {
+                string keyStatsJson = reader.ReadToEnd();
+
+                IEXFormatter formatter = new IEXFormatter();
+                IexKeyStats keyStats = formatter.FormatKeyStats(keyStatsJson);
+
+                keyStats.CompanyName.Should().Be("Apple Inc.");
+                keyStats.Employees.Should().Be(null);
+                keyStats.ExDividendDate.Should().Be(null);
+                keyStats.NextDividendDate.Should().Be(null);
+                keyStats.NextEarningsDate.Should().Be(null);
+            }
+        }
+
         [Fact]
         public void Should_Format_Company()
         {
@@ -261,6 +296,21 @@ namespace IEXDotNet.UnitTests
                 company.Tags[1].Should().Be("Telecommunications Equipment");
                 company.Symbol.Should().Be("AAPL");
                 company.Employees.Should().Be(132000);
+            }
+        }
+
+        [Fact]
+        public void Should_Format_Company2()
+        {
+            using (StreamReader reader = new StreamReader(Path.Combine("IEXResponseText", "Company2.json")))
+            {
+                string companyJson = reader.ReadToEnd();
+
+                IEXFormatter formatter = new IEXFormatter();
+                IexCompany company = formatter.FormatCompany(companyJson);
+
+                company.Symbol.Should().Be("AAAU");
+                company.Employees.Should().BeNull();
             }
         }
     }

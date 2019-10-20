@@ -31,6 +31,19 @@ namespace IEXDotNet
         }
 
         /// <summary>
+        /// GET /ref-data/symbols
+        /// </summary>
+        /// <returns>The raw string result of the request.</returns>
+        public virtual async Task<string> GetSymbols()
+        {
+            var routeUrl = $"ref-data/symbols";
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+            var stringTask = client.GetStringAsync(requestUrl);
+
+            return await stringTask;
+        }
+
+        /// <summary>
         /// GET /stock/{symbol}/balance-sheet/{last}/{field}
         /// </summary>
         /// <returns>The raw string result of the request.</returns>

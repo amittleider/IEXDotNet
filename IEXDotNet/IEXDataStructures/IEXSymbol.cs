@@ -2,24 +2,16 @@
 
 namespace IEXDotNet.IEXDataStructures
 {
-    public class IEXSymbol
+    public class IexSymbol
     {
-        public string Symbol
-        {
-            get;
-            set;
-        }
-
-        public DateTime Date
-        {
-            get;
-            set;
-        }
-
-        public bool IsEnabled
-        {
-            get;
-            set;
-        }
+        public string Symbol;
+        public string Exchange;
+        public string Name;
+        public DateTime Date;
+        public string Type;
+        public string IexId;
+        public string Region;
+        public string Currency;
+        public bool IsEnabled;
     }
 }

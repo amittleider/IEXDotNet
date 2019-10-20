@@ -12,7 +12,7 @@
         public string SecurityName;
         public string IssueType;
         public string Sector;
-        public int Employees;
+        public double? Employees;
         public string[] Tags;
     }
 }
