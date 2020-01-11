@@ -12,7 +12,6 @@ variables:
   BuildPlatform: 'Any CPU'
   System.Debug: 'false'
   Parameters.Solution: IEXDotNet
-  NugetApiKey: oy2ddvn5an4zeiqchg7ar65q2ilws3mujdx3xqxod65ivy
 
 steps:
 - script: |
