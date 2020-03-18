@@ -6,3 +6,6 @@ C# wrapper for IEX APIs. http://iexcloud.io/docs/api/
 
 ## Nuget package
 https://www.nuget.org/packages/IEXDotNet/
+
+## IEX Referral
+Consider using me as a referral on IEX by signing up with this link: https://iexcloud.io/s/635df1db 
