@@ -1,6 +1,9 @@
 ## IEXDotNet
 C# wrapper for IEX APIs. http://iexcloud.io/docs/api/
 
+## Examples
+See the tests for examples: `IEXDotNet.UnitTests/IEXClientTests.cs`
+
 ## Builds
 [![Build Status](https://dev.azure.com/amittleider/IEXDotNet/_apis/build/status/amittleider.IEXDotNet?branchName=master)](https://dev.azure.com/amittleider/IEXDotNet/_build/latest?definitionId=2&branchName=master)
 
