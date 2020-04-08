@@ -101,5 +101,11 @@ namespace IEXDotNet
             IexCompany company = JsonConvert.DeserializeObject<IexCompany>(companyJson);
             return company;
         }
+
+        public List<IexTopsLast> FormatTopsLast(string topsLastJson)
+        {
+            List<IexTopsLast> topsLast = JsonConvert.DeserializeObject<List<IexTopsLast>>(topsLastJson);
+            return topsLast;
+        }
     }
 }

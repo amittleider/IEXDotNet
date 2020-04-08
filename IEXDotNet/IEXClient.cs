@@ -218,5 +218,23 @@ namespace IEXDotNet
 
             return responseString;
         }
+
+        public virtual async Task<string> GetTopsLast()
+        {
+            string routeUrl = $"tops/last";
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+            var responseString = await client.GetStringAsync(requestUrl);
+
+            return responseString;
+        }
+
+        public virtual async Task<string> GetTopsLast(string symbol)
+        {
+            string routeUrl = $"tops/last?symbols={symbol}";
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}&token={token}");
+            var responseString = await client.GetStringAsync(requestUrl);
+
+            return responseString;
+        }
     }
 }

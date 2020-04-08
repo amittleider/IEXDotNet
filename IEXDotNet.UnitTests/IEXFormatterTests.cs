@@ -313,5 +313,43 @@ namespace IEXDotNet.UnitTests
                 company.Employees.Should().BeNull();
             }
         }
+
+        [Fact]
+        public void Should_Format_TopsLast1()
+        {
+            using (StreamReader reader = new StreamReader(Path.Combine("IEXResponseText", "TopsLast1.json")))
+            {
+                string topsLastJson = reader.ReadToEnd();
+
+                IEXFormatter formatter = new IEXFormatter();
+                IexTopsLast topsLast = formatter.FormatTopsLast(topsLastJson).First();
+
+                topsLast.Symbol.Should().Be("MSFT");
+                topsLast.Price.Should().Be(171.21);
+                topsLast.Size.Should().Be(101);
+                topsLast.Time.Should().Be(1662031674818);
+            }
+        }
+
+        [Fact]
+        public void Should_Format_TopsLast2()
+        {
+            using (StreamReader reader = new StreamReader(Path.Combine("IEXResponseText", "TopsLast2.json")))
+            {
+                string topsLastJson = reader.ReadToEnd();
+
+                IEXFormatter formatter = new IEXFormatter();
+
+                List<IexTopsLast> topsLast = formatter.FormatTopsLast(topsLastJson);
+
+                topsLast.Count.Should().Be(9838);
+
+                var lastTopsLast = topsLast.Last();
+                lastTopsLast.Symbol.Should().Be("GTS");
+                lastTopsLast.Price.Should().Be(14.15);
+                lastTopsLast.Size.Should().Be(102);
+                lastTopsLast.Time.Should().Be(1628083243790);
+            }
+        }
     }
 }

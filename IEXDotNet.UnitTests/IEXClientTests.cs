@@ -196,5 +196,29 @@ namespace IEXDotNet.UnitTests
             string result = await client.GetCompany("MSFT");
             result.Should().NotBeNullOrEmpty();
         }
+
+        [Fact]
+        public async Task Should_GetTopsLast_ForSingleCompany()
+        {
+            var config = new ConfigurationBuilder()
+                       .AddJsonFile("appsettings.json")
+                       .Build();
+            string token = config["TOKEN"];
+            IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
+            string result = await client.GetTopsLast("MSFT");
+            result.Should().NotBeNullOrEmpty();
+        }
+
+        [Fact]
+        public async Task Should_GetTopsLast_ForEverything()
+        {
+            var config = new ConfigurationBuilder()
+                       .AddJsonFile("appsettings.json")
+                       .Build();
+            string token = config["TOKEN"];
+            IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
+            string result = await client.GetTopsLast();
+            result.Should().NotBeNullOrEmpty();
+        }
     }
 }
