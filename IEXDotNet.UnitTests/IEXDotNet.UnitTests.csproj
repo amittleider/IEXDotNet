@@ -27,6 +27,8 @@
     <None Remove="IEXResponseText\TopsLast1.json" />
     <None Remove="IEXResponseText\TopsLast2.json" />
     <None Remove="IEXResponseText\UpcomingEarnings.json" />
+    <None Remove="IexSseResponseText\cryptoquotes.json" />
+    <None Remove="IexSseResponseText\newsevents.json" />
     <None Remove="IncomeStatement.txt" />
   </ItemGroup>
 
@@ -98,6 +100,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="IEXResponseText\UpcomingEarnings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IexSseResponseText\cryptoquotes.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IexSseResponseText\newsevents.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

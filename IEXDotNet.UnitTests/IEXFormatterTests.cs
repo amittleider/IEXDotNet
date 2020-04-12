@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace IEXDotNet.UnitTests
@@ -349,6 +351,63 @@ namespace IEXDotNet.UnitTests
                 lastTopsLast.Price.Should().Be(14.15);
                 lastTopsLast.Size.Should().Be(102);
                 lastTopsLast.Time.Should().Be(1628083243790);
+            }
+        }
+
+        [Fact]
+        public void Should_Format_CryptoQuotes()
+        {
+            IEXFormatter formatter = new IEXFormatter();
+
+            using (StreamReader reader = new StreamReader(Path.Combine("IexSseResponseText", "cryptoquotes.json")))
+            {
+                string cryptoQuoteJson = reader.ReadLine();
+
+                IexCryptoQuote cryptoQuote = formatter.FormatCryptoQuoteLine(cryptoQuoteJson);
+                cryptoQuote.Symbol.Should().Be("BTCUSDT");
+                cryptoQuote.AskPrice.Should().Be(6970.25);
+                cryptoQuote.AskSize.Should().Be(0.075793);
+                cryptoQuote.BidPrice.Should().Be(7145);
+                cryptoQuote.BidSize.Should().Be(1.718794);
+                cryptoQuote.CalculationPrice.Should().Be("realtime");
+                cryptoQuote.High.Should().BeNull();
+                cryptoQuote.LatestPrice.Should().Be(6874.43);
+                cryptoQuote.LatestSource.Should().Be("Real time price");
+                cryptoQuote.LatestUpdate.Should().Be(1618359674388);
+                cryptoQuote.LatestVolume.Should().BeNull();
+                cryptoQuote.Low.Should().BeNull();
+                cryptoQuote.PreviousClose.Should().BeNull();
+                cryptoQuote.PrimaryExchange.Should().Be("0");
+                cryptoQuote.Sector.Should().Be("otcureryncyrcp");
+                cryptoQuote.Symbol.Should().Be("BTCUSDT");
+
+                cryptoQuoteJson = reader.ReadLine();
+                cryptoQuote = formatter.FormatCryptoQuoteLine(cryptoQuoteJson);
+
+                cryptoQuoteJson = reader.ReadLine();
+                cryptoQuote = formatter.FormatCryptoQuoteLine(cryptoQuoteJson);
+            }
+        }
+
+        [Fact]
+        public void Should_Format_NewsEvents()
+        {
+            IEXFormatter formatter = new IEXFormatter();
+
+            using (StreamReader reader = new StreamReader(Path.Combine("IexSseResponseText", "newsevents.json")))
+            {
+                string newsEventJson = reader.ReadLine();
+
+                var newsEvent = formatter.FormatNewsLine(newsEventJson);
+                newsEvent.Datetime.Should().Be(1545215400000L);
+                newsEvent.HasPaywall.Should().BeTrue();
+                newsEvent.Headline.Should().NotBeEmpty();
+                newsEvent.Image.Should().NotBeEmpty();
+                newsEvent.Lang.Should().Be("en");
+                newsEvent.Related.Should().Be("AAPL,AMZN,GOOG,GOOGL,MSFT");
+                newsEvent.Source.Should().Be("Benzinga");
+                newsEvent.Summary.Should().NotBeEmpty();
+                newsEvent.Url.Should().NotBeEmpty();
             }
         }
     }
