@@ -3,6 +3,7 @@ using IEXDotNet.IEXDataStructures.Converters;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace IEXDotNet
 {
@@ -41,6 +42,13 @@ namespace IEXDotNet
             IEXCashFlowStatementList cashFlowStatementList = JsonConvert.DeserializeObject<IEXCashFlowStatementList>(cashFlowStatementJson);
 
             return cashFlowStatementList;
+        }
+
+        public IexNews FormatNewsLine(string line)
+        {
+            string newsLineJson = $"{{{line}}}";
+            SseEventWrapper<IexNews> iexNewsLine = JsonConvert.DeserializeObject<SseEventWrapper<IexNews>>(newsLineJson);
+            return iexNewsLine.Data.First();
         }
 
         public List<string> FormatPeers(string peersJson)
@@ -106,6 +114,14 @@ namespace IEXDotNet
         {
             List<IexTopsLast> topsLast = JsonConvert.DeserializeObject<List<IexTopsLast>>(topsLastJson);
             return topsLast;
+        }
+
+        public IexCryptoQuote FormatCryptoQuoteLine(string cryptoQuoteJson)
+        {
+            cryptoQuoteJson = $"{{{cryptoQuoteJson}}}";
+            SseEventWrapper<IexCryptoQuote> iexCryptoQuoteLine = JsonConvert.DeserializeObject<SseEventWrapper<IexCryptoQuote>>(cryptoQuoteJson);
+            IexCryptoQuote cryptoQuote = iexCryptoQuoteLine.Data.First();
+            return cryptoQuote;
         }
     }
 }
