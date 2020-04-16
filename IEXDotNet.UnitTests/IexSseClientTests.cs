@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using IEXDotNet.IEXDataStructures;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;

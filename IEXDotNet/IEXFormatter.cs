@@ -44,11 +44,9 @@ namespace IEXDotNet
             return cashFlowStatementList;
         }
 
-        public IexNews FormatNewsLine(string line)
+        public List<IexNews> FormatNewsLine(string line)
         {
-            string newsLineJson = $"{{{line}}}";
-            SseEventWrapper<IexNews> iexNewsLine = JsonConvert.DeserializeObject<SseEventWrapper<IexNews>>(newsLineJson);
-            return iexNewsLine.Data.First();
+            return JsonConvert.DeserializeObject<List<IexNews>>(line);
         }
 
         public List<string> FormatPeers(string peersJson)
@@ -116,12 +114,10 @@ namespace IEXDotNet
             return topsLast;
         }
 
-        public IexCryptoQuote FormatCryptoQuoteLine(string cryptoQuoteJson)
+        public List<IexCryptoQuote> FormatCryptoQuoteLine(string cryptoQuoteJson)
         {
-            cryptoQuoteJson = $"{{{cryptoQuoteJson}}}";
-            SseEventWrapper<IexCryptoQuote> iexCryptoQuoteLine = JsonConvert.DeserializeObject<SseEventWrapper<IexCryptoQuote>>(cryptoQuoteJson);
-            IexCryptoQuote cryptoQuote = iexCryptoQuoteLine.Data.First();
-            return cryptoQuote;
+            List<IexCryptoQuote> iexCryptoQuotes = JsonConvert.DeserializeObject<List<IexCryptoQuote>>(cryptoQuoteJson);
+            return iexCryptoQuotes;
         }
     }
 }

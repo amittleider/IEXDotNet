@@ -31,54 +31,52 @@ namespace IEXDotNet
         {
             var routeUrl = $"cryptoQuotes";
             var requestUrl = new Uri($"{baseUrl}/{routeUrl}?symbols={symbols}&token={token}");
-            using (var stream = await client.GetStreamAsync(requestUrl))
+
+            var config = LaunchDarkly.EventSource.Configuration.Builder(requestUrl).Build();
+            var eventSource = new LaunchDarkly.EventSource.EventSource(config);
+
+            eventSource.MessageReceived += (s, e) =>
             {
-                using (var reader = new StreamReader(stream))
+                var data = e.Message.Data;
+                var cryptoQuotes = this.iexFormatter.FormatCryptoQuoteLine(data);
+                foreach (var cryptoQuote in cryptoQuotes)
                 {
-
-                    while (!reader.EndOfStream)
-                    {
-                        var line = await reader.ReadLineAsync();
-                        if (!string.IsNullOrWhiteSpace(line))
-                        {
-                            IexCryptoQuote cryptoQuote = this.iexFormatter.FormatCryptoQuoteLine(line);
-                            this.CryptoQuoteEvent?.Invoke(this, cryptoQuote);
-                        }
-
-                        if (cancelationToken.IsCancellationRequested)
-                        {
-                            break;
-                        }
-                    }
+                    this.CryptoQuoteEvent?.Invoke(this, cryptoQuote);
                 }
-            }
+
+                if (cancelationToken.IsCancellationRequested)
+                {
+                    eventSource.Close();
+                }
+            };
+
+            await eventSource.StartAsync();
         }
 
         public async Task SubscribeToNewsStream(string symbols, CancellationToken cancelationToken)
         {
             var routeUrl = $"news-stream";
             var requestUrl = new Uri($"{baseUrl}/{routeUrl}?symbols={symbols}&token={token}");
-            using (var stream = await client.GetStreamAsync(requestUrl))
+
+            var config = LaunchDarkly.EventSource.Configuration.Builder(requestUrl).Build();
+            var eventSource = new LaunchDarkly.EventSource.EventSource(config);
+
+            eventSource.MessageReceived += (s, e) =>
             {
-                using (var reader = new StreamReader(stream))
+                var data = e.Message.Data;
+                var newsEvents = this.iexFormatter.FormatNewsLine(data);
+                foreach (var newsEvent in newsEvents)
                 {
-
-                    while (!reader.EndOfStream)
-                    {
-                        var line = await reader.ReadLineAsync();
-                        if (!string.IsNullOrWhiteSpace(line))
-                        {
-                            IexNews newsLine = this.iexFormatter.FormatNewsLine(line);
-                            this.NewsEvent?.Invoke(this, newsLine);
-                        }
-
-                        if (cancelationToken.IsCancellationRequested)
-                        {
-                            break;
-                        }
-                    }
+                    this.NewsEvent?.Invoke(this, newsEvent);
                 }
-            }
+
+                if (cancelationToken.IsCancellationRequested)
+                {
+                    eventSource.Close();
+                }
+            };
+
+            await eventSource.StartAsync();
         }
     }
 }
