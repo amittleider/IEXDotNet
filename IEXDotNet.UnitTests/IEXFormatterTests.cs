@@ -363,29 +363,29 @@ namespace IEXDotNet.UnitTests
             {
                 string cryptoQuoteJson = reader.ReadLine();
 
-                IexCryptoQuote cryptoQuote = formatter.FormatCryptoQuoteLine(cryptoQuoteJson);
-                cryptoQuote.Symbol.Should().Be("BTCUSDT");
-                cryptoQuote.AskPrice.Should().Be(6970.25);
-                cryptoQuote.AskSize.Should().Be(0.075793);
-                cryptoQuote.BidPrice.Should().Be(7145);
-                cryptoQuote.BidSize.Should().Be(1.718794);
-                cryptoQuote.CalculationPrice.Should().Be("realtime");
-                cryptoQuote.High.Should().BeNull();
-                cryptoQuote.LatestPrice.Should().Be(6874.43);
-                cryptoQuote.LatestSource.Should().Be("Real time price");
-                cryptoQuote.LatestUpdate.Should().Be(1618359674388);
-                cryptoQuote.LatestVolume.Should().BeNull();
-                cryptoQuote.Low.Should().BeNull();
-                cryptoQuote.PreviousClose.Should().BeNull();
-                cryptoQuote.PrimaryExchange.Should().Be("0");
-                cryptoQuote.Sector.Should().Be("otcureryncyrcp");
-                cryptoQuote.Symbol.Should().Be("BTCUSDT");
+                List<IexCryptoQuote> cryptoQuotes = formatter.FormatCryptoQuoteLine(cryptoQuoteJson);
+                cryptoQuotes[0].Symbol.Should().Be("BTCUSDT");
+                cryptoQuotes[0].AskPrice.Should().Be(6970.25);
+                cryptoQuotes[0].AskSize.Should().Be(0.075793);
+                cryptoQuotes[0].BidPrice.Should().Be(7145);
+                cryptoQuotes[0].BidSize.Should().Be(1.718794);
+                cryptoQuotes[0].CalculationPrice.Should().Be("realtime");
+                cryptoQuotes[0].High.Should().BeNull();
+                cryptoQuotes[0].LatestPrice.Should().Be(6874.43);
+                cryptoQuotes[0].LatestSource.Should().Be("Real time price");
+                cryptoQuotes[0].LatestUpdate.Should().Be(1618359674388);
+                cryptoQuotes[0].LatestVolume.Should().BeNull();
+                cryptoQuotes[0].Low.Should().BeNull();
+                cryptoQuotes[0].PreviousClose.Should().BeNull();
+                cryptoQuotes[0].PrimaryExchange.Should().Be("0");
+                cryptoQuotes[0].Sector.Should().Be("otcureryncyrcp");
+                cryptoQuotes[0].Symbol.Should().Be("BTCUSDT");
 
                 cryptoQuoteJson = reader.ReadLine();
-                cryptoQuote = formatter.FormatCryptoQuoteLine(cryptoQuoteJson);
+                cryptoQuotes = formatter.FormatCryptoQuoteLine(cryptoQuoteJson);
 
                 cryptoQuoteJson = reader.ReadLine();
-                cryptoQuote = formatter.FormatCryptoQuoteLine(cryptoQuoteJson);
+                cryptoQuotes = formatter.FormatCryptoQuoteLine(cryptoQuoteJson);
             }
         }
 
@@ -398,16 +398,16 @@ namespace IEXDotNet.UnitTests
             {
                 string newsEventJson = reader.ReadLine();
 
-                var newsEvent = formatter.FormatNewsLine(newsEventJson);
-                newsEvent.Datetime.Should().Be(1545215400000L);
-                newsEvent.HasPaywall.Should().BeTrue();
-                newsEvent.Headline.Should().NotBeEmpty();
-                newsEvent.Image.Should().NotBeEmpty();
-                newsEvent.Lang.Should().Be("en");
-                newsEvent.Related.Should().Be("AAPL,AMZN,GOOG,GOOGL,MSFT");
-                newsEvent.Source.Should().Be("Benzinga");
-                newsEvent.Summary.Should().NotBeEmpty();
-                newsEvent.Url.Should().NotBeEmpty();
+                var newsEvents = formatter.FormatNewsLine(newsEventJson);
+                newsEvents[0].Datetime.Should().Be(1545215400000L);
+                newsEvents[0].HasPaywall.Should().BeTrue();
+                newsEvents[0].Headline.Should().NotBeEmpty();
+                newsEvents[0].Image.Should().NotBeEmpty();
+                newsEvents[0].Lang.Should().Be("en");
+                newsEvents[0].Related.Should().Be("AAPL,AMZN,GOOG,GOOGL,MSFT");
+                newsEvents[0].Source.Should().Be("Benzinga");
+                newsEvents[0].Summary.Should().NotBeEmpty();
+                newsEvents[0].Url.Should().NotBeEmpty();
             }
         }
     }

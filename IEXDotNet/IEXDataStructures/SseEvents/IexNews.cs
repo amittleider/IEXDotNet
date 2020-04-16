@@ -1,4 +1,6 @@
-﻿namespace IEXDotNet.IEXDataStructures
+﻿using System;
+
+namespace IEXDotNet.IEXDataStructures
 {
     public class IexNews
     {
@@ -26,7 +28,9 @@
 
         public override string ToString()
         {
-            return $"{this.Headline}: {this.Url}";
+            DateTimeOffset dateTimeOffset = DateTimeOffset.FromUnixTimeMilliseconds(Datetime);
+            DateTime dt = dateTimeOffset.UtcDateTime;
+            return $"{dt} - {this.Headline}: {this.Url} . {this.Related}";
         }
     }
 }
