@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace IEXDotNet
 {
@@ -24,7 +25,12 @@ namespace IEXDotNet
         public virtual async Task<string> GetIEXSymbols()
         {
             var routeUrl = $"ref-data/iex/symbols";
-            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            query["token"] = token;
+            string queryString = query.ToString();
+
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?{queryString}");
             var stringTask = client.GetStringAsync(requestUrl);
 
             return await stringTask;
@@ -37,7 +43,12 @@ namespace IEXDotNet
         public virtual async Task<string> GetSymbols()
         {
             var routeUrl = $"ref-data/symbols";
-            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            query["token"] = token;
+            string queryString = query.ToString();
+
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?{queryString}");
             var stringTask = client.GetStringAsync(requestUrl);
 
             return await stringTask;
@@ -50,7 +61,13 @@ namespace IEXDotNet
         public virtual async Task<string> GetBalanceSheet(string symbol, int last, string frequency)
         {
             var routeUrl = $"stock/{symbol}/balance-sheet/{last}";
-            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}&period={frequency}");
+
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            query["token"] = token;
+            query["period"] = frequency;
+            string queryString = query.ToString();
+
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?{queryString}");
             var stringTask = client.GetStringAsync(requestUrl);
 
             return await stringTask;
@@ -63,7 +80,13 @@ namespace IEXDotNet
         public virtual async Task<string> GetIncomeStatement(string symbol, int last, string frequency)
         {
             var routeUrl = $"stock/{symbol}/income/{last}";
-            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}&period={frequency}");
+
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            query["token"] = token;
+            query["period"] = frequency;
+            string queryString = query.ToString();
+
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?{queryString}");
             var stringTask = client.GetStringAsync(requestUrl);
 
             return await stringTask;
@@ -76,7 +99,13 @@ namespace IEXDotNet
         public virtual async Task<string> GetCashFlowStatement(string symbol, int last, string frequency)
         {
             var routeUrl = $"stock/{symbol}/cash-flow/{last}";
-            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}&period={frequency}");
+
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            query["token"] = token;
+            query["period"] = frequency;
+            string queryString = query.ToString();
+
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?{queryString}");
             var stringTask = client.GetStringAsync(requestUrl);
 
             return await stringTask;
@@ -90,7 +119,12 @@ namespace IEXDotNet
         public virtual async Task<string> GetUpcomingEarnings(string symbol)
         {
             var routeUrl = $"stock/{symbol}/upcoming-earnings";
-            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            query["token"] = token;
+            string queryString = query.ToString();
+
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?{queryString}");
             var stringTask = client.GetStringAsync(requestUrl);
 
             return await stringTask;
@@ -105,7 +139,12 @@ namespace IEXDotNet
         public virtual async Task<string> GetPeers(string symbol)
         {
             var routeUrl = $"stock/{symbol}/peers";
-            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            query["token"] = token;
+            string queryString = query.ToString();
+
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?{queryString}");
             var responseString = await client.GetStringAsync(requestUrl);
 
             return responseString;
@@ -120,13 +159,13 @@ namespace IEXDotNet
         public virtual async Task<string> GetShortInterest(string symbol)
         {
             var routeUrl = $"stock/{symbol}/short-interest";
-            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
 
-            string responseString = string.Empty;
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            query["token"] = token;
+            string queryString = query.ToString();
 
-            responseString = await client.GetStringAsync(requestUrl);
-
-            return responseString;
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?{queryString}");
+            return await client.GetStringAsync(requestUrl);
         }
 
         /// <summary>
@@ -139,7 +178,13 @@ namespace IEXDotNet
         public virtual async Task<string> GetHistoricalPrices(string symbol, string range, bool chartCloseOnly = false)
         {
             string routeUrl = $"stock/{symbol}/chart/{range}";
-            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?chartCloseOnly={chartCloseOnly}&token={token}");
+
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            query["token"] = token;
+            query["chartCloseOnly"] = chartCloseOnly.ToString();
+            string queryString = query.ToString();
+
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?{queryString}");
             var responseString = await client.GetStringAsync(requestUrl);
 
             return responseString;
@@ -153,7 +198,12 @@ namespace IEXDotNet
         public virtual async Task<string> GetAccountUsage()
         {
             string routeUrl = $"account/usage";
-            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            query["token"] = token;
+            string queryString = query.ToString();
+
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?{queryString}");
             var responseString = await client.GetStringAsync(requestUrl);
 
             return responseString;
@@ -167,7 +217,12 @@ namespace IEXDotNet
         public virtual async Task<string> GetDividends(string symbol, string range)
         {
             string routeUrl = $"stock/{symbol}/dividends/{range}";
-            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            query["token"] = token;
+            string queryString = query.ToString();
+
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?{queryString}");
             var responseString = await client.GetStringAsync(requestUrl);
 
             return responseString;
@@ -180,7 +235,12 @@ namespace IEXDotNet
         public virtual async Task<string> GetDataPoints(string symbol)
         {
             string routeUrl = $"data-points/{symbol}";
-            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            query["token"] = token;
+            string queryString = query.ToString();
+
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?{queryString}");
             var responseString = await client.GetStringAsync(requestUrl);
 
             return responseString;
@@ -190,7 +250,12 @@ namespace IEXDotNet
         public virtual async Task<string> GetTimeSeries(string key, string symbol)
         {
             string routeUrl = $"time-series/{key}/{symbol}";
-            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            query["token"] = token;
+            string queryString = query.ToString();
+
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?{queryString}");
             var responseString = await client.GetStringAsync(requestUrl);
 
             return responseString;
@@ -199,7 +264,12 @@ namespace IEXDotNet
         public virtual async Task<string> GetKeyStats(string symbol)
         {
             string routeUrl = $"stock/{symbol}/stats";
-            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            query["token"] = token;
+            string queryString = query.ToString();
+
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?{queryString}");
             var responseString = await client.GetStringAsync(requestUrl);
 
             return responseString;
@@ -213,7 +283,12 @@ namespace IEXDotNet
         public virtual async Task<string> GetCompany(string symbol)
         {
             string routeUrl = $"stock/{symbol}/company";
-            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            query["token"] = token;
+            string queryString = query.ToString();
+
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?{queryString}");
             var responseString = await client.GetStringAsync(requestUrl);
 
             return responseString;
@@ -222,7 +297,12 @@ namespace IEXDotNet
         public virtual async Task<string> GetTopsLast()
         {
             string routeUrl = $"tops/last";
-            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            query["token"] = token;
+            string queryString = query.ToString();
+
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?{queryString}");
             var responseString = await client.GetStringAsync(requestUrl);
 
             return responseString;
@@ -230,8 +310,14 @@ namespace IEXDotNet
 
         public virtual async Task<string> GetTopsLast(string symbol)
         {
-            string routeUrl = $"tops/last?symbols={symbol}";
-            var requestUrl = new Uri($"{baseUrl}/{routeUrl}&token={token}");
+            string routeUrl = $"tops/last";
+
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            query["token"] = token;
+            query["symbols"] = symbol;
+            string queryString = query.ToString();
+
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?{queryString}");
             var responseString = await client.GetStringAsync(requestUrl);
 
             return responseString;
