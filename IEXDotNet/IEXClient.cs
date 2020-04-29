@@ -136,10 +136,10 @@ namespace IEXDotNet
         /// <param name="symbol"></param>
         /// <param name="timeframe"></param>
         /// <returns></returns>
-        public virtual async Task<string> GetHistoricalPrices(string symbol, string range)
+        public virtual async Task<string> GetHistoricalPrices(string symbol, string range, bool chartCloseOnly = false)
         {
             string routeUrl = $"stock/{symbol}/chart/{range}";
-            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?chartCloseOnly={chartCloseOnly}&token={token}");
             var responseString = await client.GetStringAsync(requestUrl);
 
             return responseString;
