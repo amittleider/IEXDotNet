@@ -126,6 +126,18 @@ namespace IEXDotNet.UnitTests
         }
 
         [Fact]
+        public async Task GetHistoricalPrices_WithChartCloseOnly_Should_FetchResults()
+        {
+            var config = new ConfigurationBuilder()
+                       .AddJsonFile("appsettings.json")
+                       .Build();
+            string token = config["TOKEN"];
+            IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
+            string result = await client.GetHistoricalPrices("msft", "5d", chartCloseOnly: true);
+            result.Should().NotBeNullOrEmpty();
+        }
+
+        [Fact]
         public async Task GetAccountUsage_Should_FetchResults()
         {
             var config = new ConfigurationBuilder()
