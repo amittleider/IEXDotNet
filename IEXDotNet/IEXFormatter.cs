@@ -119,5 +119,10 @@ namespace IEXDotNet
             List<IexCryptoQuote> iexCryptoQuotes = JsonConvert.DeserializeObject<List<IexCryptoQuote>>(cryptoQuoteJson);
             return iexCryptoQuotes;
         }
+
+        public DateTime FormatDataPoint(string dataPointJson)
+        {
+            return DateTime.Parse(dataPointJson.Substring(1, dataPointJson.Length - 2));
+        }
     }
 }

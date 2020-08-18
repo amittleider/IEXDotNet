@@ -1,5 +1,6 @@
 using FluentAssertions;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using Xunit;
@@ -171,6 +172,41 @@ namespace IEXDotNet.UnitTests
             IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
             string result = await client.GetDataPoints("MSFT");
             result.Should().NotBeNullOrEmpty();
+        }
+
+        [Fact]
+        public async Task GetDataPoint_Should_FetchResults()
+        {
+            var config = new ConfigurationBuilder()
+                       .AddJsonFile("appsettings.json")
+                       .Build();
+            string token = config["TOKEN"];
+            IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
+            string result = await client.GetDataPoint("MSFT", IexDataPointVariable.LATEST_FINANCIAL_REPORT_DATE);
+            result.Should().NotBeNullOrEmpty();
+        }
+
+        [Fact(Skip = "This test case fails in the sandbox environment, but passes in prod.")]
+        public async Task LastReportDate_Should_BeTheSameAs_TheDataPointForTheLastReportDate()
+        {
+            var config = new ConfigurationBuilder()
+                       .AddJsonFile("appsettings.json")
+                       .Build();
+            string token = config["TOKEN"];
+            IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
+
+            IEXFormatter formatter = new IEXFormatter();
+
+            // Get the last updated data point
+            string dataPointResult = await client.GetDataPoint("MSFT", IexDataPointVariable.LATEST_FINANCIAL_REPORT_DATE);
+            DateTime lastUpdated = formatter.FormatDataPoint(dataPointResult);
+
+            // Get the actual point that was supposed to be updated
+            var balanceSheetString = await client.GetBalanceSheet("MSFT", 1, "quarter");
+            var balanceSheet = formatter.FormatBalanceSheet(balanceSheetString);
+
+            // Ensure they are the same time
+            balanceSheet.BalanceSheet[0].ReportDate.Should().Be(lastUpdated);
         }
 
         [Fact]

@@ -186,6 +186,29 @@ namespace IEXDotNet
             return responseString;
         }
 
+        /// <summary>
+        /// To find out the most recent available 10-K/10-Qs
+        /// GET /data-points/{symbol}/{VARIABLE}
+        /// </summary>
+        public virtual async Task<string> GetDataPoint(string symbol, IexDataPointVariable iexDataPointVariable)
+        {
+            string dataPointVariable = iexDataPointVariable.GetDescription();
+            return await GetDataPoint(symbol, dataPointVariable);
+        }
+
+        /// <summary>
+        /// To find out the most recent available 10-K/10-Qs
+        /// GET /data-points/{symbol}/{VARIABLE}
+        /// </summary>
+        public virtual async Task<string> GetDataPoint(string symbol, string iexDataPointVariable)
+        {
+            string routeUrl = $"data-points/{symbol}/{iexDataPointVariable}";
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?token={token}");
+            var responseString = await client.GetStringAsync(requestUrl);
+
+            return responseString;
+        }
+
 
         public virtual async Task<string> GetTimeSeries(string key, string symbol)
         {

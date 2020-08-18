@@ -10,6 +10,9 @@
     <None Remove="AllIEXSymbols.txt" />
     <None Remove="appsettings.json" />
     <None Remove="BalanceSheet.txt" />
+    <None Remove="C:\Users\amitt\.nuget\packages\xunit.runner.visualstudio\2.4.1\build\netcoreapp1.0\xunit.runner.reporters.netcoreapp10.dll" />
+    <None Remove="C:\Users\amitt\.nuget\packages\xunit.runner.visualstudio\2.4.1\build\netcoreapp1.0\xunit.runner.utility.netcoreapp10.dll" />
+    <None Remove="C:\Users\amitt\.nuget\packages\xunit.runner.visualstudio\2.4.1\build\netcoreapp1.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll" />
     <None Remove="CashFlowStatement.txt" />
     <None Remove="IEXResponseText\AccountUsage.json" />
     <None Remove="IEXResponseText\Company.json" />
@@ -22,6 +25,7 @@
     <None Remove="IEXResponseText\KeyStats.json" />
     <None Remove="IEXResponseText\KeyStats2.json" />
     <None Remove="IEXResponseText\PeersResponse.txt" />
+    <None Remove="IEXResponseText\SingleDataPoint.json" />
     <None Remove="IEXResponseText\Symbols.json" />
     <None Remove="IEXResponseText\TimeSeries.json" />
     <None Remove="IEXResponseText\TopsLast1.json" />
@@ -37,6 +41,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="IEXResponseText\KeyStats2.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IEXResponseText\SingleDataPoint.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="IEXResponseText\Symbols.json">
