@@ -10,9 +10,6 @@
     <None Remove="AllIEXSymbols.txt" />
     <None Remove="appsettings.json" />
     <None Remove="BalanceSheet.txt" />
-    <None Remove="C:\Users\amitt\.nuget\packages\xunit.runner.visualstudio\2.4.1\build\netcoreapp1.0\xunit.runner.reporters.netcoreapp10.dll" />
-    <None Remove="C:\Users\amitt\.nuget\packages\xunit.runner.visualstudio\2.4.1\build\netcoreapp1.0\xunit.runner.utility.netcoreapp10.dll" />
-    <None Remove="C:\Users\amitt\.nuget\packages\xunit.runner.visualstudio\2.4.1\build\netcoreapp1.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll" />
     <None Remove="CashFlowStatement.txt" />
     <None Remove="IEXResponseText\AccountUsage.json" />
     <None Remove="IEXResponseText\Company.json" />
@@ -127,12 +124,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\IEXDotNet\IEXDotNet.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="System">
-      <HintPath>System</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

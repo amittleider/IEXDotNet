@@ -8,7 +8,13 @@ namespace IEXDotNet
     public enum IexDataPointVariable
     {
         [Description("LATEST-FINANCIAL-REPORT-DATE")]
-        LATEST_FINANCIAL_REPORT_DATE = 1
+        LATEST_FINANCIAL_REPORT_DATE = 1,
+
+        [Description("LATEST-FINANCIAL-QUARTERLY-REPORT-DATE")]
+        LATEST_FINANCIAL_QUARTERLY_REPORT_DATE = 2,
+
+        [Description("LATEST-FINANCIAL-ANNUAL-REPORT-DATE")]
+        LATEST_FINANCIAL_ANNUAL_REPORT_DATE = 3,
     }
 
     public static class EnumDescriptions
