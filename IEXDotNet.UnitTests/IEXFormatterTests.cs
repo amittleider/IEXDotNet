@@ -221,6 +221,19 @@ namespace IEXDotNet.UnitTests
             }
         }
 
+        [Fact]
+        public void Should_Format_SingleDataPoint()
+        {
+            using (StreamReader reader = new StreamReader(Path.Combine("IEXResponseText", "SingleDataPoint.json")))
+            {
+                string dataPointJson = reader.ReadToEnd();
+
+                IEXFormatter formatter = new IEXFormatter();
+                DateTime lastUpdated = formatter.FormatDataPoint(dataPointJson);
+                lastUpdated.Should().Be(new DateTime(2020, 6, 30));
+            }
+        }
+
         [Fact(Skip = "Time series is not implemented")]
         public void Should_Format_TimeSeries()
         {

@@ -22,6 +22,7 @@
     <None Remove="IEXResponseText\KeyStats.json" />
     <None Remove="IEXResponseText\KeyStats2.json" />
     <None Remove="IEXResponseText\PeersResponse.txt" />
+    <None Remove="IEXResponseText\SingleDataPoint.json" />
     <None Remove="IEXResponseText\Symbols.json" />
     <None Remove="IEXResponseText\TimeSeries.json" />
     <None Remove="IEXResponseText\TopsLast1.json" />
@@ -37,6 +38,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="IEXResponseText\KeyStats2.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IEXResponseText\SingleDataPoint.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="IEXResponseText\Symbols.json">
@@ -120,12 +124,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\IEXDotNet\IEXDotNet.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="System">
-      <HintPath>System</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>
