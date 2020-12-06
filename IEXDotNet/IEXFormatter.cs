@@ -1,9 +1,7 @@
 ﻿using IEXDotNet.IEXDataStructures;
-using IEXDotNet.IEXDataStructures.Converters;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace IEXDotNet
 {
@@ -85,11 +83,6 @@ namespace IEXDotNet
             return dataPoints;
         }
 
-        public List<IexTimeSeries> FormatTimeSeries(string timeSeriesJson)
-        {
-            throw new NotImplementedException();
-        }
-
         public List<IexUpcomingEarnings> FormatUpcomingEarnings(string upcomingEarningsJson)
         {
             List<IexUpcomingEarnings> earnings = JsonConvert.DeserializeObject<List<IexUpcomingEarnings>>(upcomingEarningsJson);
@@ -123,6 +116,11 @@ namespace IEXDotNet
         public DateTime FormatDataPoint(string dataPointJson)
         {
             return DateTime.Parse(dataPointJson.Substring(1, dataPointJson.Length - 2));
+        }
+
+        public List<IexAdvancedFundamentals> FormatTimeSeriesFundamentals(string advancedFundamentalsJson)
+        {
+            return JsonConvert.DeserializeObject<List<IexAdvancedFundamentals>>(advancedFundamentalsJson);
         }
     }
 }

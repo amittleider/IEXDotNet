@@ -21,10 +21,12 @@
     <None Remove="IEXResponseText\HistoricalPrices.txt" />
     <None Remove="IEXResponseText\KeyStats.json" />
     <None Remove="IEXResponseText\KeyStats2.json" />
+    <None Remove="IEXResponseText\KeyStats3.json" />
     <None Remove="IEXResponseText\PeersResponse.txt" />
     <None Remove="IEXResponseText\SingleDataPoint.json" />
     <None Remove="IEXResponseText\Symbols.json" />
     <None Remove="IEXResponseText\TimeSeries.json" />
+    <None Remove="IEXResponseText\TimeSeriesFundamentals.json" />
     <None Remove="IEXResponseText\TopsLast1.json" />
     <None Remove="IEXResponseText\TopsLast2.json" />
     <None Remove="IEXResponseText\UpcomingEarnings.json" />
@@ -38,6 +40,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="IEXResponseText\KeyStats2.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IEXResponseText\KeyStats3.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="IEXResponseText\SingleDataPoint.json">
@@ -95,6 +100,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="IEXResponseText\TimeSeries.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IEXResponseText\TimeSeriesFundamentals.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="IEXResponseText\TopsLast1.json">

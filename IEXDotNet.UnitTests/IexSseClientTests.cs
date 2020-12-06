@@ -12,7 +12,7 @@ namespace IEXDotNet.UnitTests
 {
     public class IexSseClientTests
     {
-        [Fact]
+        [Fact(Skip = "SSE tests stalling. Are these endpoint still active?")]
         public async Task CryptoSubscription_Should_ThrowEvents()
         {
             var config = new ConfigurationBuilder()
@@ -31,7 +31,7 @@ namespace IEXDotNet.UnitTests
             await client.SubscribeToCryptoQuote("BTCUSDT", tokenSource.Token);
         }
 
-        [Fact]
+        [Fact(Skip = "SSE tests stalling. Are these endpoint still active?")]
         public async Task NewsSubscription_Should_ThrowEvents()
         {
             var config = new ConfigurationBuilder()
@@ -51,7 +51,7 @@ namespace IEXDotNet.UnitTests
         }
 
 
-        [Fact]
+        [Fact(Skip = "SSE tests stalling. Are these endpoint still active?")]
         public async Task NewsSubscription_Should_Subscribe_WithTwoSymbols()
         {
             var config = new ConfigurationBuilder()
