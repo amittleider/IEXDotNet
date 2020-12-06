@@ -1,7 +1,10 @@
 using FluentAssertions;
+using IEXDotNet.IEXDataStructures;
 using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -98,7 +101,10 @@ namespace IEXDotNet.UnitTests
                        .Build();
             string token = config["TOKEN"];
             IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
-            string result = await client.GetUpcomingEarnings("AAPL");
+            string result = await client.GetUpcomingEarnings("market");
+            IEXFormatter formatter = new IEXFormatter();
+            List<IexUpcomingEarnings> iexUpcomingEarnings = formatter.FormatUpcomingEarnings(result);
+            var a = iexUpcomingEarnings.Max(w => w.ReportDate);
             result.Should().NotBeNullOrEmpty();
         }
 
