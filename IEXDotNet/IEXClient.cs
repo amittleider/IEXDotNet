@@ -269,7 +269,6 @@ namespace IEXDotNet
             return responseString;
         }
 
-
         public virtual async Task<string> GetTimeSeries(string key, string symbol)
         {
             string routeUrl = $"time-series/{key}/{symbol}";
@@ -338,6 +337,22 @@ namespace IEXDotNet
             var query = HttpUtility.ParseQueryString(string.Empty);
             query["token"] = token;
             query["symbols"] = symbol;
+            string queryString = query.ToString();
+
+            var requestUrl = new Uri($"{baseUrl}/{routeUrl}?{queryString}");
+            var responseString = await client.GetStringAsync(requestUrl);
+
+            return responseString;
+        }
+
+        public virtual async Task<string> GetTimeSeriesFundamentals(string symbol, string frequency, DateTime from, DateTime to)
+        {
+            string routeUrl = $"time-series/fundamentals/{symbol}/{frequency}";
+
+            var query = HttpUtility.ParseQueryString(string.Empty);
+            query["token"] = token;
+            query["from"] = from.ToString("yyyy-MM-dd");
+            query["to"] = to.ToString("yyyy-MM-dd");
             string queryString = query.ToString();
 
             var requestUrl = new Uri($"{baseUrl}/{routeUrl}?{queryString}");

@@ -14,25 +14,11 @@ string symbols = await client.GetIEXSymbols();
 List<IexIexSymbol> symbolsList = formatter.FormatIexIexSymbols(symbols);
 ```
 
-- Get balance sheet data
+- Get advanced fundamental data
 ```C#
 IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
-string balanceSheetJson = await client.GetBalanceSheet("AAPL", 4, "quarter");
-IEXBalanceSheetList balanceSheetList = formatter.FormatBalanceSheet(balanceSheetJson);
-```
-
-- Get income statement
-```C#
-IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
-string incomeStatementJson = await client.GetIncomeStatement("AAPL", 4, "quarter");
-IEXIncomeStatementList incomeStatementList = formatter.FormatIncomeStatement(incomeStatementJson);
-```
-
-- Get upcoming earnings
-```C#
-IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
-string upcomingEarningsJson = await client.GetUpcomingEarnings("AAPL");
-List<IexUpcomingEarnings> iexUpcomingEarnings = formatter.FormatUpcomingEarnings(upcomingEarningsJson);
+string advancedFundamentalsJson = await client.GetTimeSeriesFundamentals("MSFT", "annual", new DateTime(2000, 1, 1), DateTime.Now);
+List<IexAdvancedFundamentals> advancedFundamentals = formatter.FormatTimeSeriesFundamentals(advancedFundamentalsJson);
 ```
 
 - Get historical prices

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IEXDotNet.IEXDataStructures.Converters;
+using Newtonsoft.Json;
+using System;
 
 namespace IEXDotNet.IEXDataStructures
 {
@@ -19,8 +21,14 @@ namespace IEXDotNet.IEXDataStructures
         public double? TtmEPS;
         public double? TtmDividendRate;
         public double? DividendYield;
+
+        [JsonConverter(typeof(MinDateTimeConverter))]
         public DateTime? NextDividendDate;
+
+        [JsonConverter(typeof(MinDateTimeConverter))]
         public DateTime? ExDividendDate;
+
+        [JsonConverter(typeof(MinDateTimeConverter))]
         public DateTime? NextEarningsDate;
         public double? PeRatio;
         public double? Beta;

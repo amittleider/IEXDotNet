@@ -93,7 +93,7 @@ namespace IEXDotNet.UnitTests
             result.Should().NotBeNullOrEmpty();
         }
 
-        [Fact]
+        [Fact(Skip = "As of December 1, 2020, this endpoint requires additional entitlements.")]
         public async Task GetUpcomingEarnings_Should_FetchResults()
         {
             var config = new ConfigurationBuilder()
@@ -177,6 +177,7 @@ namespace IEXDotNet.UnitTests
             string token = config["TOKEN"];
             IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
             string result = await client.GetDataPoints("MSFT");
+
             result.Should().NotBeNullOrEmpty();
         }
 
@@ -272,6 +273,30 @@ namespace IEXDotNet.UnitTests
             string token = config["TOKEN"];
             IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
             string result = await client.GetTopsLast();
+            result.Should().NotBeNullOrEmpty();
+        }
+
+        [Fact]
+        public async Task Should_GetTimeSeries_Fundamentals_Annual()
+        {
+            var config = new ConfigurationBuilder()
+                       .AddJsonFile("appsettings.json")
+                       .Build();
+            string token = config["TOKEN"];
+            IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
+            string result = await client.GetTimeSeriesFundamentals("MSFT", "annual", new DateTime(2000, 1, 1), DateTime.Now);
+            result.Should().NotBeNullOrEmpty();
+        }
+
+        [Fact]
+        public async Task Should_GetTimeSeries_Fundamentals_Quarterly()
+        {
+            var config = new ConfigurationBuilder()
+                       .AddJsonFile("appsettings.json")
+                       .Build();
+            string token = config["TOKEN"];
+            IEXClient client = new IEXClient(IEXBaseUrl.SandboxUrl, token);
+            string result = await client.GetTimeSeriesFundamentals("MSFT", "quarterly", new DateTime(2000, 1, 1), DateTime.Now);
             result.Should().NotBeNullOrEmpty();
         }
     }
