@@ -1,3 +1,6 @@
+# Update on Fundamentals - Jan 2021
+IEX has updated their Fundamentals endpoints in 2021 to be called now "Advanced Fundamentals". This advanced fundamentals dataset is a pass-through to [New Constructs](https://client.newconstructs.com/nc/documentation/api.htm). It should be noted that New Constructs is significantly cheaper than IEX, so it is recommended to integrate with New Constructs directly for fundamentals. New constructs covers very large companies, but mid-caps and small-caps are hard to find. If that's the type of thing you're looking for, I'd recommend checking out the [Shardar dataset](https://www.quandl.com/databases/SF1/data) on Quandl.
+
 ## IEXDotNet
 C# wrapper for IEX APIs. http://iexcloud.io/docs/api/
 
